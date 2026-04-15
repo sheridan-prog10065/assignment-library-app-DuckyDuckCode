@@ -19,10 +19,34 @@ namespace LibraryAppInteractive.BusinessLogic
         /// </summary>
         const float LATE_PENALTY_PER_DAY = 0.25f;
      
-        
-        public PaperBook() : base()
+        /// <summary>
+        /// Constructor for a paper book
+        /// </summary>
+        /// <param name="bookName"></param>
+        /// <param name="bookISBN"></param>
+        public PaperBook(string bookName, string bookISBN) : base(bookName, bookISBN)
         {
+    
+        }
 
+        /// <summary>
+        /// Lets user borrow a book. probably override
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public LibraryAsset BorrowBook()
+        {
+            throw new Exception("Unimplemented");
+        }
+
+        /// <summary>
+        /// Lets userreturn a book. probably override
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public (TimeSpan, int, decimal) ReturnBook(int libID)
+        {
+            throw new Exception("Unimplemented");
         }
     }
 }

@@ -24,10 +24,68 @@ public class Library
     /// </summary>
     const int _DEFAULT_LIBID_START = 100;
 
+    /// <summary>
+    /// Constructor for library
+    /// </summary>
     public Library()
     {
         _bookList = new List<Book>();
         _libIDGeneratorSeed = 0;
 
+    }
+
+    /// <summary>
+    /// Creates default books for the class
+    /// </summary>
+    private void CreateDefaultBooks()
+    {
+
+    }
+
+    /// <summary>
+    /// Creates a library ID
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    private int DetermineLibID()
+    {
+        throw new Exception("Unimplemented");
+    }
+
+    /// <summary>
+    /// Allows user to register a new book for the system /// </summary>
+    /// <param name="bookName"></param>
+    /// <param name="bookISBN"></param>
+    /// <param name="authors"></param>
+    /// <param name="bookType"></param>
+    /// <param name="nCopies"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    public Book RegisterBook(string bookName, string bookISBN, string[] authors, BookType bookType, int nCopies)
+    {
+        throw new Exception("Unimplemented");
+    }
+
+    /// <summary>
+    /// Allows user to find a certain book by name
+    /// </summary>
+    /// <param name="bookName"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    public Book FindBookByName(string bookName)
+    {
+        throw new Exception("Unimplemented");
+    }
+
+    /// <summary>
+    /// Allows user to find a certain book by ISBN 
+    /// </summary>
+    /// <param name="bookISBN"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+
+    public Book FindBookByISBN(string bookISBN)
+    {
+        throw new Exception("Unimplemented");
     }
 }

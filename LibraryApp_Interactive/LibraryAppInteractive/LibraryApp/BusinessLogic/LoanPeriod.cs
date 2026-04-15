@@ -22,11 +22,34 @@ namespace LibraryAppInteractive.BusinessLogic
         /// </summary>
         private DateTime _dueDate;
 
-        public LoanPeriod()
+        public LoanPeriod(DateTime borrowedOn, DateTime returnedOn)
         {
-            _borrowedOn = new DateTime();
-            _returnedOn = new DateTime();
+            _borrowedOn =borrowedOn;
+            _returnedOn = returnedOn;
             _dueDate = new DateTime();
+        }
+
+        public DateTime BorrowedOn
+        {
+            get { return _borrowedOn; }
+            set { _borrowedOn = value; }
+        }
+
+        public DateTime ReturnedOn
+        {
+            get { return _returnedOn; }
+            set { _returnedOn = value; }
+        }
+
+        public TimeSpan LoanDuration
+        {
+            get { return _returnedOn - _borrowedOn; }
+
+        }
+
+        public TimeSpan LatePeriod
+        {
+            get { return DateTime.Now - _dueDate; }
         }
     }
 }

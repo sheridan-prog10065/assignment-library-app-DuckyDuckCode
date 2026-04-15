@@ -26,12 +26,53 @@ namespace LibraryAppInteractive.BusinessLogic
         /// </summary>
         private LoanPeriod _loanPeriod;
 
-        public LibraryAsset()
+        /// <summary>
+        /// Constructor for a LibraryAsset
+        /// </summary>
+        /// <param name="libID"></param>
+        /// <param name="book"></param>
+        public LibraryAsset(int libID, Book book)
         {
-            _book = new Book();
-            _libID = 0;
+            _book = book;
+            _libID = libID;
             _status = AssetStatus.Available;
             _loanPeriod = new LoanPeriod();
+        }
+
+        /// <summary>
+        /// libID as a property
+        /// </summary>
+        public int LibID
+        {
+            get { return _libID; }
+            set { _libID = value; }
+        }
+
+        /// <summary>
+        /// Asset status as a property
+        /// </summary>
+        public AssetStatus Status
+        {
+            get { return _status; }
+            set { _status = value; }
+        }
+
+        /// <summary>
+        /// Loanperiod as a property
+        /// </summary>
+        public LoanPeriod Loan
+        {
+            get { return _loanPeriod; }
+            set { _loanPeriod = value; }
+        }
+
+        /// <summary>
+        ///IsAvailable as a property, 
+        /// </summary>
+        public bool IsAvailable
+        {
+            get { return IsAvailable; }
+            set { IsAvailable = value; }
         }
     }
 

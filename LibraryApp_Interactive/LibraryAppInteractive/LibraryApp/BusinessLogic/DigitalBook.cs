@@ -18,11 +18,45 @@ namespace LibraryAppInteractive.BusinessLogic
         /// </summary>
         private float _latePenaltyPerDay;
 
-        public DigitalBook() : base()
+        /// <summary>
+        /// Constructor for DigitalBook
+        /// </summary>
+        /// <param name="bookName"></param>
+        /// <param name="bookISBN"></param>
+        public DigitalBook(string bookName, string bookISBN) : base(bookName, bookISBN)
         {
             _maxBorrowDays = 0;
             _latePenaltyPerDay = 0.0f;
         }
+
+        /// <summary>
+        /// Calculates a loan license
+        /// </summary>
+        private void DetermineLoanLicense()
+        {
+
+        }
+
+        /// <summary>
+        /// Lets user borrow a book. probably override
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public LibraryAsset BorrowBook()
+        {
+            throw new Exception("Unimplemented");
+        }
+        /// <summary>
+        /// Lets userreturn a book. probably override
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public (TimeSpan,int, decimal) ReturnBook(int libID)
+        {
+            throw new Exception("Unimplemented");
+        }
+
+
     }
 
 }
