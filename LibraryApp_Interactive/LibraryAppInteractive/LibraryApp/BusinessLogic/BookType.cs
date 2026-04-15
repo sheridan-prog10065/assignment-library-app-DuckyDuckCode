@@ -9,5 +9,9 @@ namespace LibraryAppInteractive.BusinessLogic
     /// </summary>
     public enum BookType
     {
+        Paper = 1,
+        Digital,
+        Audio,
+       
     }
 }

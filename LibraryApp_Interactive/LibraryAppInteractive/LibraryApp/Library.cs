@@ -1,3 +1,5 @@
+using LibraryAppInteractive.BusinessLogic;
+
 namespace LibraryAppInteractive;
 
 /// <summary>
@@ -9,4 +11,23 @@ namespace LibraryAppInteractive;
 /// </summary>
 public class Library
 {
+    /// <summary>
+    /// List of books the library has
+    /// </summary>
+    private List<Book> _bookList;
+    /// <summary>
+    /// A seed to generate a new ID of the liberary
+    /// </summary>
+    private int _libIDGeneratorSeed;
+    /// <summary>
+    /// Default ID a library is initialized with before receiving a generated one from the generator seed
+    /// </summary>
+    const int _DEFAULT_LIBID_START = 100;
+
+    public Library()
+    {
+        _bookList = new List<Book>();
+        _libIDGeneratorSeed = 0;
+
+    }
 }
