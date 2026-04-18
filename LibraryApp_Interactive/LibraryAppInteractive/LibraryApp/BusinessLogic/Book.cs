@@ -8,6 +8,16 @@ namespace LibraryAppInteractive.BusinessLogic
     /// <summary>
     /// A book contained within a library
     /// </summary>
+    /// 
+
+    //TODO
+    //be able to check availability using the AssetStatus
+    //User should be able to borrow a library asset through BorrowBook and be able to return a library asset using ReturnBook
+    //Borrow book should change an assets status to loaned
+    //Return book should make it available again
+    //Add check that the book is currently available before borrowing
+    //User should be able to change a book's status to reserved using ReserveBook
+    //should be able to find another asset for a user if the requested one is not available
     public class Book
     {
         /// <summary>

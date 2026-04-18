@@ -8,6 +8,7 @@ namespace LibraryAppInteractive.BusinessLogic
     /// Whether a book is categorized paper, digital or audio in the library
     /// </summary>
     
+    //Nothing else TODO here
     public enum BookType
     {
         Paper = 1,

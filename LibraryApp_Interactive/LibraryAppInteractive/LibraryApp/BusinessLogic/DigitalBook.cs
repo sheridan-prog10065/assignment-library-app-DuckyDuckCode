@@ -7,6 +7,15 @@ namespace LibraryAppInteractive.BusinessLogic
     /// <summary>
     /// Derived class from base class Book, implements a digital book
     /// </summary>
+    /// 
+
+    //TODO:
+    //User should be able to borrow a library asset through BorrowBook and be able to return a library asset using ReturnBook
+    //DetermineLoanLicense should use LoanPeriod
+    //Borrow book should change an assets status to loaned
+    //Return book should make it available again
+    //Add check that the book is currently available before borrowing
+    
     public class DigitalBook : Book
     {
         /// <summary>

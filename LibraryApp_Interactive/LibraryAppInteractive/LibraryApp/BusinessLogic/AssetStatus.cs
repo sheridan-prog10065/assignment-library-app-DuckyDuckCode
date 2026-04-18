@@ -7,6 +7,8 @@ namespace LibraryAppInteractive.BusinessLogic
     /// <summary>
     /// Connects to a book or other library asset to determine if its not available, available, loaned, or reserved
     /// </summary>
+    /// 
+    //Nothing more TODO here
     public enum AssetStatus
     {
         NotAvailable,

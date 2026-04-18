@@ -7,6 +7,8 @@ namespace LibraryAppInteractive.BusinessLogic
     /// <summary>
     /// Implements an asset of the library
     /// </summary>
+    /// 
+    //No unimplemented methods TODO it seems
     public class LibraryAsset
     {
         /// <summary>
