@@ -102,7 +102,15 @@ public class Library
     /// <exception cref="Exception"></exception>
     public Book FindBookByName(string bookName)
     {
-        throw new Exception("Unimplemented");
+       foreach(Book iBook in _bookList)
+        {
+            if(bookName == iBook.Name)
+            {
+                return iBook;
+                
+            }
+        }
+        return null;
     }
 
     /// <summary>
@@ -114,6 +122,14 @@ public class Library
 
     public Book FindBookByISBN(string bookISBN)
     {
-        throw new Exception("Unimplemented");
+        foreach (Book iBook in _bookList)
+        {
+            if (bookISBN == iBook.ISBN)
+            {
+                return iBook;
+
+            }
+        }
+        return null;
     }
 }
