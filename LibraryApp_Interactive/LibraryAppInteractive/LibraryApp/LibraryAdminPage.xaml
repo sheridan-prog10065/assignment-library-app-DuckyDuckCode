@@ -15,6 +15,15 @@
             <Entry x:Name="_txtBookISBN" Placeholder="Book ISBN" Grid.Row="1"/>
             <Entry x:Name="_txtBookAuthorList" Placeholder="Book author list seperated with commas" Grid.Row="1"/>
             <Entry x:Name="_txtBookAssetList" Placeholder="Book asset list seperated with commas" Grid.Row="1"/>
+            <Entry x:Name="_txtBookCopyCount" Placeholder="Amount of book copies" Grid.Row="1"/>
+            <Picker x:Name="_pckBookType" Title="Select a type" Grid.Row="1">
+                <Picker.Items>
+                    <x:String>Paper</x:String>
+                    <x:String>Digital</x:String>
+                    <x:String>Audio</x:String>
+                </Picker.Items>
+            </Picker>
+            
         </VerticalStackLayout>
 
         <Button Text="Register Book" Grid.Row="2" Grid.Column="1" Margin="0,0,0,100" HeightRequest="100" Clicked="OnRegisterBook"/>

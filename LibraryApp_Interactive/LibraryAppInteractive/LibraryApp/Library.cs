@@ -24,13 +24,16 @@ public class Library
     /// </summary>
     const int _DEFAULT_LIBID_START = 100;
 
+
+    
+
     /// <summary>
     /// Constructor for library
     /// </summary>
     public Library()
     {
         _bookList = new List<Book>();
-        _libIDGeneratorSeed = 0;
+        _libIDGeneratorSeed = _DEFAULT_LIBID_START;
 
     }
 
@@ -47,9 +50,10 @@ public class Library
     /// </summary>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    private int DetermineLibID()
+    public int DetermineLibID()
     {
-        throw new Exception("Unimplemented");
+        _libIDGeneratorSeed++;
+        return _libIDGeneratorSeed;
     }
 
     /// <summary>
@@ -63,8 +67,32 @@ public class Library
     /// <exception cref="Exception"></exception>
     public Book RegisterBook(string bookName, string bookISBN, string[] authors, BookType bookType, int nCopies)
     {
-        throw new Exception("Unimplemented");
+        Book newBook;
+
+        if (bookType == BookType.Paper)
+        {
+            newBook = new PaperBook(bookName, bookISBN);
+        }
+        else if (bookType == BookType.Digital)
+        {
+            newBook = new DigitalBook(bookName, bookISBN);
+        }
+        else
+        {
+            newBook = new Book(bookName, bookISBN);
+        }
+
+        foreach (string iAuthor in authors)
+        {
+            newBook.Authors.Add(iAuthor);
+        }
+
+        _bookList.Add(newBook);
+
+        return newBook;
     }
+
+       
 
     /// <summary>
     /// Allows user to find a certain book by name
