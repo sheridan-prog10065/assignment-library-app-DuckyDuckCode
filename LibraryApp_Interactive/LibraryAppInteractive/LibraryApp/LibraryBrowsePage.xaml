@@ -3,8 +3,49 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LibraryAppInteractive.LibraryBrowsePage"
              Title="Browse Interactive Library">
-			 
-	<Label Text="Browse Library page for the Interactive Library App"
-	       HorizontalOptions="Center"
-	       VerticalOptions="Center"/> 
+    <Grid>
+        <Grid x:Name="_viewMainMenu" RowDefinitions="*,*,*" ColumnDefinitions="*,*,*">
+            <Label Text="Main Menu"
+           Grid.Column="1"
+	       />
+            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" >
+                <Entry x:Name="_txtSearchBook"  Margin="0,100,0,0" Placeholder="Book Name or ISBN" Grid.Row="1"/>
+                <Button Text="Select Book"  Margin="0,100,0,0" Clicked="OnViewBookMenu"/>
+            </VerticalStackLayout>
+
+        </Grid>
+
+
+
+
+        <Grid x:Name="_viewBookMenu" RowDefinitions="*,*,*" ColumnDefinitions="*,*,*" IsVisible="False">
+            <Label Text="What would you like to do with this book?"
+             Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center"
+              />
+            <VerticalStackLayout Grid.Column="1"  Grid.Row="2">
+                <Button Text="Check Status"  Clicked="OnCheckStatus"/>
+                <Button Text="Borrow Book"  Clicked="OnBorrowBook"/>
+                <Button Text="Return Book"  Clicked="OnReturnBook"/>
+                <Button Text="Display Book Assets"  Clicked="OnDisplayBookAssets"/>
+                <Button Text="Exit"  Clicked="OnReturnToMainMenu"/>
+            </VerticalStackLayout>
+        </Grid>
+
+
+
+        <Grid x:Name="_viewLibraryAssets" RowDefinitions="*,*,*" ColumnDefinitions="*,*,*" IsVisible="False">
+            <Label Text="Library Assets"
+              Grid.Column="1"
+             />
+            <Button Text="Exit"  Grid.Column="2" Grid.Row="2" Clicked="OnReturnToBookMenu"/>
+            <CollectionView x:Name="_lstBookAssets" Grid.Column="1"  VerticalOptions="End"
+             HorizontalOptions="Fill"
+              />
+
+        </Grid>
+
+
+
+    </Grid>
+
 </ContentPage>
