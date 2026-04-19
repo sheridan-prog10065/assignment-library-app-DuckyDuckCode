@@ -73,9 +73,22 @@ namespace LibraryAppInteractive.BusinessLogic
         /// </summary>
         public bool IsAvailable
         {
-            get { return IsAvailable; }
-            set { IsAvailable = value; }
+            get { return _status == AssetStatus.Available; }
+            set {
+                if (value == true)
+                {
+                    _status = AssetStatus.Available;
+                }
+                else
+                {
+                    _status = AssetStatus.Loaned;
+                }
+            }
+        }
+        public override string ToString()
+        {
+            return $"LibID: {LibID}, Status: {Status} ";
         }
     }
-
-}
+   
+    }

@@ -86,6 +86,13 @@ public class Library
         {
             newBook.Authors.Add(iAuthor);
         }
+        
+        for (int iAsset = 0; iAsset<nCopies; iAsset++)
+        {
+            int assetId = DetermineLibID();
+            LibraryAsset newAsset = new LibraryAsset(assetId, newBook);
+            newBook.AddAsset(newAsset);
+        }
 
         _bookList.Add(newBook);
 

@@ -34,8 +34,7 @@ namespace LibraryAppInteractive.BusinessLogic
         /// <param name="bookISBN"></param>
         public DigitalBook(string bookName, string bookISBN) : base(bookName, bookISBN)
         {
-            _maxBorrowDays = 0;
-            _latePenaltyPerDay = 0.0f;
+            DetermineLoanLicense();
         }
 
         /// <summary>
@@ -43,7 +42,8 @@ namespace LibraryAppInteractive.BusinessLogic
         /// </summary>
         private void DetermineLoanLicense()
         {
-
+            _maxBorrowDays = 14;
+            _latePenaltyPerDay = 0.50f;
         }
 
         /// <summary>
@@ -51,10 +51,19 @@ namespace LibraryAppInteractive.BusinessLogic
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public LibraryAsset BorrowBook()
+        public override LibraryAsset BorrowBook()
         {
-            throw new Exception("Unimplemented");
+            LibraryAsset currentAsset = findNextAvailableAsset();
+            if (currentAsset == null)
+            {
+                throw new Exception("No copies are available. Try another book");
+            }
+
+            currentAsset.Status = AssetStatus.Loaned;
+            currentAsset.Loan = new LoanPeriod(DateTime.Now, DateTime.MinValue, _maxBorrowDays);
+            return currentAsset;
         }
+
         /// <summary>
         /// Lets userreturn a book. probably override
         /// </summary>
@@ -62,10 +71,28 @@ namespace LibraryAppInteractive.BusinessLogic
         /// <exception cref="Exception"></exception>
         public (TimeSpan,int, decimal) ReturnBook(int libID)
         {
-            throw new Exception("Unimplemented");
+            LibraryAsset returnAsset = findLibraryAsset(libID);
+            if (returnAsset != null)
+            {
+                returnAsset.Status = AssetStatus.Available;
+                LoanPeriod loan = returnAsset.Loan;
+                loan.ReturnedOn = DateTime.Now;
+                returnAsset.Loan = loan;
+
+
+            }
+            //time borrowd, days late, fine
+            TimeSpan timeBorrowed = returnAsset.Loan.LoanDuration;
+            int daysLate = (int)returnAsset.Loan.LatePeriod.TotalDays;
+            if (daysLate < 0)
+            {
+                daysLate = 0;
+            }
+            decimal fine = daysLate * (decimal)_latePenaltyPerDay;
+            return (timeBorrowed, daysLate, fine);
+
         }
-
-
     }
-
 }
+
+

@@ -24,11 +24,11 @@ namespace LibraryAppInteractive.BusinessLogic
         /// </summary>
         private DateTime _dueDate;
 
-        public LoanPeriod(DateTime borrowedOn, DateTime returnedOn)
+        public LoanPeriod(DateTime borrowedOn, DateTime returnedOn, int maxBorrowDays)
         {
             _borrowedOn =borrowedOn;
             _returnedOn = returnedOn;
-            _dueDate = new DateTime();
+            _dueDate =  borrowedOn.AddDays(maxBorrowDays);
         }
 
         public DateTime BorrowedOn

@@ -91,7 +91,15 @@ namespace LibraryAppInteractive.BusinessLogic
         /// <exception cref="Exception"></exception>
         public (bool,LibraryAsset) CheckAvailability()
         {
-            throw new Exception("Unimplemented");
+            foreach(LibraryAsset asset in _libAssetList)
+            {
+                if (asset.IsAvailable)
+                {
+                    return (true, asset);
+                }
+             
+            }
+            return (false, null);
         }
 
         /// <summary>
@@ -99,9 +107,17 @@ namespace LibraryAppInteractive.BusinessLogic
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public LibraryAsset BorrowBook()
+        public virtual LibraryAsset BorrowBook()
         {
-            throw new Exception("Unimplemented");
+            LibraryAsset currentAsset = findNextAvailableAsset();
+            if (currentAsset == null)
+            {
+                throw new Exception("No copies are available. Try another book");
+            }
+
+            currentAsset.Status = AssetStatus.Loaned;
+            currentAsset.Loan = new LoanPeriod(DateTime.Now, DateTime.MinValue, 14);
+            return currentAsset;
         }
 
         /// <summary>
@@ -109,12 +125,34 @@ namespace LibraryAppInteractive.BusinessLogic
         /// </summary>
         /// <param name="libID"></param>
         /// <returns></returns>
-        /// <exception cref="Exception"></exception>
+        /// <exception cref="Exception"></exceptionpublic
         public (TimeSpan, int, decimal) ReturnBook(int libID)
         {
-            throw new Exception("Unimplemented");
-        }
+            LibraryAsset returnAsset = findLibraryAsset(libID);
+            if(returnAsset != null)
+            {
+                returnAsset.Status = AssetStatus.Available;
 
+            }
+           
+            LoanPeriod loan = returnAsset.Loan;
+            loan.ReturnedOn = DateTime.Now;
+            returnAsset.Loan = loan;
+            
+         
+            TimeSpan timeBorrowed = returnAsset.Loan.LoanDuration;
+            int daysLate = (int)returnAsset.Loan.LatePeriod.TotalDays;
+            if (daysLate < 0)
+            {
+                daysLate = 0;
+            }
+            decimal fine = daysLate * 0.25m;
+           
+
+            return (timeBorrowed, daysLate, fine);
+
+        }
+        
         /// <summary>
         /// Allows user to reserve a book in advance
         /// </summary>
@@ -122,7 +160,14 @@ namespace LibraryAppInteractive.BusinessLogic
         /// <exception cref="Exception"></exception>
         public LibraryAsset ReserveBook()
         {
-            throw new Exception("Unimplemented");
+            LibraryAsset currentAsset = findNextAvailableAsset();
+            if (currentAsset == null)
+            {
+                throw new Exception("No copies are available. Try another book");
+            }
+
+            currentAsset.Status = AssetStatus.Reserved;
+            return currentAsset;
         }
 
         /// <summary>
@@ -131,9 +176,16 @@ namespace LibraryAppInteractive.BusinessLogic
         /// <param name="libID"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        private LibraryAsset findLibraryAsset(int libID)
+        protected LibraryAsset findLibraryAsset(int libID)
         {
-            throw new Exception("Unimplemented");
+            foreach(LibraryAsset asset in _libAssetList)
+            {
+                if(asset.LibID == libID)
+                {
+                    return asset;
+                }
+            }
+            return null;
         }
 
         /// <summary>
@@ -141,9 +193,21 @@ namespace LibraryAppInteractive.BusinessLogic
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        private LibraryAsset findNextAvailableAsset()
+        protected LibraryAsset findNextAvailableAsset()
         {
-            throw new Exception("Unimplemented");
+            foreach (LibraryAsset asset in _libAssetList)
+            {
+                if (asset.Status == AssetStatus.Available)
+                {
+                    return asset;
+                }
+            }
+            return null;
+        }
+
+        public void AddAsset(LibraryAsset asset)
+        {
+            _libAssetList.Add(asset);
         }
     }
 }

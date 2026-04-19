@@ -39,9 +39,17 @@ namespace LibraryAppInteractive.BusinessLogic
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public LibraryAsset BorrowBook()
+        public override LibraryAsset BorrowBook()
         {
-            throw new Exception("Unimplemented");
+            LibraryAsset currentAsset =  findNextAvailableAsset();
+            if (currentAsset == null)
+            {
+                throw new Exception("No copies are available. Try another book");
+            }
+
+            currentAsset.Status = AssetStatus.Loaned;
+            currentAsset.Loan = new LoanPeriod(DateTime.Now, DateTime.MinValue, MAX_BORROW_DAYS);
+            return currentAsset;
         }
 
         /// <summary>
@@ -51,7 +59,26 @@ namespace LibraryAppInteractive.BusinessLogic
         /// <exception cref="Exception"></exception>
         public (TimeSpan, int, decimal) ReturnBook(int libID)
         {
-            throw new Exception("Unimplemented");
+            LibraryAsset returnAsset = findLibraryAsset(libID);
+            if (returnAsset != null)
+            {
+                returnAsset.Status = AssetStatus.Available;
+                LoanPeriod loan = returnAsset.Loan;
+                loan.ReturnedOn = DateTime.Now;
+                returnAsset.Loan = loan;
+
+
+            }
+            //time borrowd, days late, fine
+            TimeSpan timeBorrowed = returnAsset.Loan.LoanDuration;
+            int daysLate = (int)returnAsset.Loan.LatePeriod.TotalDays;
+            if(daysLate < 0)
+            {
+                daysLate = 0;
+            }
+            decimal fine = daysLate * (decimal)LATE_PENALTY_PER_DAY;
+            return (timeBorrowed, daysLate, fine);
+
         }
     }
 }

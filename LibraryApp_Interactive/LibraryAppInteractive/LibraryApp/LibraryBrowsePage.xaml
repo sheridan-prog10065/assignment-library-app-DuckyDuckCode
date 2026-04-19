@@ -22,6 +22,7 @@
             <Label Text="What would you like to do with this book?"
              Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center"
               />
+            <Entry x:Name="_txtBookReturn" Placeholder="Enter ID of book to return here" Grid.Row="1"/>
             <VerticalStackLayout Grid.Column="1"  Grid.Row="2">
                 <Button Text="Check Status"  Clicked="OnCheckStatus"/>
                 <Button Text="Borrow Book"  Clicked="OnBorrowBook"/>
@@ -35,7 +36,7 @@
 
         <Grid x:Name="_viewLibraryAssets" RowDefinitions="*,*,*" ColumnDefinitions="*,*,*" IsVisible="False">
             <Label Text="Library Assets"
-              Grid.Column="1"
+              VerticalOptions="Center"
              />
             <Button Text="Exit"  Grid.Column="2" Grid.Row="2" Clicked="OnReturnToBookMenu"/>
             <CollectionView x:Name="_lstBookAssets" Grid.Column="1"  VerticalOptions="End"
