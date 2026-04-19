@@ -34,6 +34,7 @@ public class Library
     {
         _bookList = new List<Book>();
         _libIDGeneratorSeed = _DEFAULT_LIBID_START;
+        CreateDefaultBooks();
 
     }
 
@@ -42,6 +43,29 @@ public class Library
     /// </summary>
     private void CreateDefaultBooks()
     {
+        RegisterBook(
+       "The Hunger Games",
+       "9780545425117",
+       new string[] { "Suzanne Collins" },
+       BookType.Paper,
+       3
+       );
+
+        RegisterBook(
+        "Certainly A Book",
+        "345",
+        new string[] { "Anna Uthor", "Ed Itor" },
+        BookType.Digital,
+        3
+        );
+
+        RegisterBook(
+       "Code Complete, 2nd Edition",
+       "0735619670",
+       new string[] { "Steve McConnell" },
+       BookType.Digital,
+       3
+        );
 
     }
 
