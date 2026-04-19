@@ -4,9 +4,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LibraryAppInteractive.LibraryAdminPage"
              Title="Manage Book Assets">
-    <ContentPage.Content>
-        <Label Text="Library Admin page for the Interactive Library App"
+    <Grid RowDefinitions="*,*,Auto" ColumnDefinitions="*,Auto,*">
+        <Label Text="Register A Book Here"
+               FontSize="Large"
+               Grid.Column="1"
                HorizontalOptions="Center"
-               VerticalOptions="Center"/>         
-    </ContentPage.Content>
+               VerticalOptions="Center"/>
+        <VerticalStackLayout Grid.Row="1" Grid.Column="1">
+            <Entry x:Name="_txtBookName" Placeholder="Book Name" Grid.Row="1"/>
+            <Entry x:Name="_txtBookISBN" Placeholder="Book ISBN" Grid.Row="1"/>
+            <Entry x:Name="_txtBookAuthorList" Placeholder="Book author list seperated with commas" Grid.Row="1"/>
+            <Entry x:Name="_txtBookAssetList" Placeholder="Book asset list seperated with commas" Grid.Row="1"/>
+            <Entry x:Name="_txtBookCopyCount" Placeholder="Amount of book copies" Grid.Row="1"/>
+            <Picker x:Name="_pckBookType" Title="Select a type" Grid.Row="1">
+                <Picker.Items>
+                    <x:String>Paper</x:String>
+                    <x:String>Digital</x:String>
+                    <x:String>Audio</x:String>
+                </Picker.Items>
+            </Picker>
+            
+        </VerticalStackLayout>
+
+        <Button Text="Register Book" Grid.Row="2" Grid.Column="1" Margin="0,0,0,100" HeightRequest="100" Clicked="OnRegisterBook"/>
+    </Grid>
 </ContentPage>
