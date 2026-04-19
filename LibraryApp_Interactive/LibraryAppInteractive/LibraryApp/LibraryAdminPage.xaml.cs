@@ -24,7 +24,7 @@ public partial class LibraryAdminPage : ContentPage
 
     }
 
-    private void OnRegisterBook(object sender, EventArgs e)
+    private async void OnRegisterBook(object sender, EventArgs e)
     {
        
         bookName = _txtBookName.Text;
@@ -38,5 +38,7 @@ public partial class LibraryAdminPage : ContentPage
         int nCopies = int.Parse(_txtBookCopyCount.Text);
 
         _library.RegisterBook(bookName, ISBN, bookAuthorArray, type, nCopies);
+
+        await DisplayAlertAsync("Success", "Successfully registered book and its copies", "OK");
     }
 }
